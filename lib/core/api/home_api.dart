@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:purchase_approval/data/model/home_response_model.dart';
 homeApiReq(String branchCode,int level) async {
   try {
-    const String url = 'http://122.165.228.175:81/PFMSINS/CBMMSWebSrv.asmx';
+    const String url = 'http://106.51.77.162/PFMSINS/CBMMSWebSrv.asmx';
     const String soapAction = 'http://tempuri.org/XmlPODtl';
      String requestBody = '<?xml version="1.0" encoding="utf-8"?>'
         '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"'

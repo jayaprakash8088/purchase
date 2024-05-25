@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 
 loginApiRequest(String userName, String pwd) async {
   try {
-    const String url = 'http://122.165.228.175:81/PFMSINS/Login.asmx';
+    const String url = 'http://106.51.77.162/PFMSINS/Login.asmx';
     const String soapAction = 'http://tempuri.org/LoginClick';
     String requestBody = '<?xml version="1.0" '
         'encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '

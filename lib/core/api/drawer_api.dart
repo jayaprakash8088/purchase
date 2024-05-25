@@ -6,7 +6,7 @@ import 'package:purchase_approval/features/utils/app_config.dart';
 
 drawerApiRequest(String userId) async {
   try {
-    const String url = 'http://122.165.228.175:81/PFMSINS/CBMMSWebSrv.asmx';
+    const String url = 'http://106.51.77.162/PFMSINS/CBMMSWebSrv.asmx';
     const String soapAction = 'http://tempuri.org/XmlPOBranch';
     String requestBody = '<?xml version="1.0" encoding="utf-8"?>'
         '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"'
