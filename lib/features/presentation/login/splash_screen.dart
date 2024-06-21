@@ -1,4 +1,7 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+import 'package:purchase_approval/data/app_shared_pref.dart';
 import 'package:purchase_approval/features/utils/app_widgets/splash_screen_text.dart';
 import 'package:purchase_approval/features/utils/images.dart';
 import 'package:purchase_approval/features/utils/my_strings.dart';
@@ -17,7 +20,15 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(
       const Duration(seconds: 2),
-      () => AppRoutes.moveToLogin(context),
+      () async {
+        var pref = AppSharedPref();
+        String ip = await pref.getIp();
+        if (ip != '') {
+          AppRoutes.moveToLogin(context);
+        } else {
+          AppRoutes.moveToRegister(context);
+        }
+      },
     );
   }
 

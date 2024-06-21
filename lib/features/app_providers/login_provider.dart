@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:purchase_approval/core/api/login_api.dart';
 import 'package:purchase_approval/features/utils/app_config.dart';
 
+import '../../data/app_shared_pref.dart';
 import '../utils/app_widgets/please_wait.dart';
 
 class LoginProvider extends ChangeNotifier{
@@ -15,7 +16,9 @@ class LoginProvider extends ChangeNotifier{
   Future<bool> callRequest(BuildContext context)async{
     showLoaderDialog(context);
     // if(!isLoaded){
-      dynamic response=await loginApiRequest(userName.text.trim(),pwd.text.trim());
+    var pref=AppSharedPref();
+    String ip=await pref.getIp();
+      dynamic response=await loginApiRequest(userName.text.trim(),pwd.text.trim(),ip);
       if(response!=null&&response){
         Navigator.pop(context);
         userId=userName.text.trim();

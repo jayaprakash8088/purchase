@@ -5,6 +5,7 @@ import 'package:fl_toast/fl_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
+import 'package:purchase_approval/data/app_shared_pref.dart';
 import 'package:purchase_approval/features/utils/app_config.dart';
 import 'package:purchase_approval/features/utils/app_widgets/please_wait.dart';
 import 'package:purchase_approval/features/utils/my_strings.dart';
@@ -90,6 +91,9 @@ class ApprovedCardWidget extends StatelessWidget {
   }
 
   Future<void> _first(BuildContext context) async {
+
+    var pref=AppSharedPref();
+    String ip=await pref.getIp();
     showLoaderDialog(baseContext);
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('dd/MM/yyyy').format(now);
@@ -103,7 +107,7 @@ class ApprovedCardWidget extends StatelessWidget {
       'level': level
     };
     var value = jsonEncode(formData);
-    bool val = await approveRejectApiRequest(value);
+    bool val = await approveRejectApiRequest(value,ip);
     if (val) {
       await showTextToast(
         duration:  const Duration(seconds: 1),
@@ -157,6 +161,8 @@ class ApprovedCardWidget extends StatelessWidget {
               TextButton(
                 child: const Text(reject),
                 onPressed: ()async  {
+                  var pref=AppSharedPref();
+                  String ip=await pref.getIp();
                   if(textEditingController.text.trim().isNotEmpty){
                     FocusScope.of(context).unfocus();
                     DateTime now = DateTime.now();
@@ -171,7 +177,7 @@ class ApprovedCardWidget extends StatelessWidget {
                       'level': level
                     };
                     var value = jsonEncode(formData);
-                    bool val = await approveRejectApiRequest(value);
+                    bool val = await approveRejectApiRequest(value,ip);
                     if (val) {
                       setState((){rejectClicked=true;});
                       await showTextToast(

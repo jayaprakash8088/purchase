@@ -1,9 +1,9 @@
 
 import 'package:http/http.dart' as http;
 
-approveRejectApiRequest(dynamic formData) async {
+approveRejectApiRequest(dynamic formData,String ip) async {
   try {
-    const String url = 'http://106.51.77.162/PFMSINS/CBMMSWebSrv.asmx';
+     String url = 'http://$ip/PFMSINS/CBMMSWebSrv.asmx';
     const String soapAction = 'http://tempuri.org/XmlPOAppr';
     String requestBody = '<?xml version="1.0" encoding="utf-8"?>'
         '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">'

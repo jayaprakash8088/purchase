@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:purchase_approval/features/utils/app_config.dart';
 
 import '../../core/api/home_api.dart';
+import '../../data/app_shared_pref.dart';
 import '../../data/model/home_response_model.dart';
 
 class HomeProvider extends ChangeNotifier {
@@ -12,9 +13,11 @@ class HomeProvider extends ChangeNotifier {
   List<MyTable>table2=[];
   List<String>docId=[];
   Future callRequest(String id) async {
+    var pref=AppSharedPref();
+    String ip=await pref.getIp();
     tempResponse.table.clear();
     docId=[];
-    response = await homeApiReq(id, level);
+    response = await homeApiReq(id, level,ip);
     if (response != null) {
       table1=response.table;
       for(int i=0;i<table1.length;i++){

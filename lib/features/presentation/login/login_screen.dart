@@ -84,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
             child: TextField(
               controller: loginProvider.userName,
               decoration: const InputDecoration(
-                  border: OutlineInputBorder(), hintText: userName),
+                  border: OutlineInputBorder(), hintText: userIdText),
             ),
           ),
           Padding(
