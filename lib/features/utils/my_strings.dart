@@ -1,5 +1,6 @@
 const title='Purchase Approval';
 const appTitle='FZ - Smart Approval';
+const register='Register User';
 const approvedPurchase='Purchase Approval';
 const purchase='Purchase';
 const userIdText= 'User ID';
@@ -47,6 +48,7 @@ const supplier='SUPPLIER';
 const date='DATE';
 /////
 const userPwd='Please enter Username/Password';
+const userCode='Please enter Company Code/User Id';
 const somethingWrong='Something went wrong. Please try again with Valid username and password';
 const rejectionReason="Reason for Rejection";
 const sureLogout='Are you sure want to Logout?';

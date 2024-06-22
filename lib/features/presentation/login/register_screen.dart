@@ -73,7 +73,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             MediaQuery.of(context).size.height * 0.08,
           ),
           child: AppBar(
-            title: Text(appTitle, style: whiteText),
+            title: Text(register, style: whiteText),
             backgroundColor: const Color.fromRGBO(174, 39, 95, 1),
           )),
       body: SingleChildScrollView(
@@ -85,29 +85,36 @@ class _RegisterScreenState extends State<RegisterScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Padding(padding: EdgeInsets.all(10.0),
-              child: Text('Enter Company Code'),),
+             Padding(padding: const EdgeInsets.only(top: 100.0,left: 10.0,
+             right: 10.0,bottom: 10.0),
+              child: Text('Enter Company Code',style: blackText,),),
             Padding(
               padding: const EdgeInsets.all(10),
-              child: TextField(
-                controller: companyCode,
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(), hintText: code),
+              child: SizedBox(
+                height: 50.0,
+                child: TextField(
+                  controller: companyCode,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(), hintText: code),
+                ),
               ),
             ),
-            const Padding(padding: EdgeInsets.all(10.0),
-              child: Text('Enter User Id'),),
+             Padding(padding: const EdgeInsets.all(10.0),
+              child: Text('Enter User Id',style: blackText,),),
             Padding(
               padding: const EdgeInsets.all(10),
-              child: TextField(
-                controller: userName,
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: userIdText),
+              child: SizedBox(
+                height: 50.0,
+                child: TextField(
+                  controller: userName,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: userIdText),
+                ),
               ),
             ),
             const SizedBox(
-              height: 10.0,
+              height: 30.0,
             ),
             GestureDetector(
               onTap: ()  async{
@@ -132,20 +139,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   }
                 }else{
                   ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text(userPwd)));
+                      const SnackBar(content: Text(userCode)));
                 }
               },
-              child: Center(
-                child: Container(
-                  height: 50,
-                  width: 250,
-                  decoration: BoxDecoration(
-                      color: const Color.fromRGBO(174, 39, 95, 1),
-                      borderRadius: BorderRadius.circular(20)),
-                  child: Center(
-                    child: Text(
-                      submit,
-                      style: smallWhiteText,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Container(
+                    height: 50,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        color: const Color.fromRGBO(174, 39, 95, 1),
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Center(
+                      child: Text(
+                        submit,
+                        style: smallWhiteText,
+                      ),
                     ),
                   ),
                 ),
