@@ -1,6 +1,6 @@
 const title='Purchase Approval';
 const appTitle='FZ - Smart Approval';
-const register='Register User';
+const register='User Registration';
 const approvedPurchase='Purchase Approval';
 const purchase='Purchase';
 const userIdText= 'User ID';
