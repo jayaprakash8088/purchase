@@ -28,6 +28,9 @@ class ApprovalPage extends StatelessWidget {
             onTap: () {
               var provider=Provider.of<DrawerProvider>(context,listen:false);
                provider.isLoaded=false;
+               provider.selectedValue=null;
+              provider.response.table.clear();
+              provider.responseModel.table.clear();
               var homeProvider=Provider.of<HomeProvider>(context,listen: false);
               homeProvider.tempResponse.table.clear();
               homeProvider.isLoaded=false;
@@ -62,6 +65,9 @@ class ApprovalPage extends StatelessWidget {
             onTap: () {
               var provider=Provider.of<DrawerProvider>(context,listen:false);
               provider.isLoaded=false;
+              provider.selectedValue=null;
+              provider.response.table.clear();
+              provider.responseModel.table.clear();
               var homeProvider=Provider.of<HomeProvider>(context,listen: false);
               homeProvider.tempResponse.table.clear();
               homeProvider.isLoaded=false;

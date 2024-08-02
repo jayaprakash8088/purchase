@@ -8,7 +8,11 @@ class DrawerProvider extends ChangeNotifier{
   bool isLoaded=false;
   DrawerResponseModel response=DrawerResponseModel(table: []);
   DrawerResponseModel responseModel=DrawerResponseModel(table: []);
+  String? selectedValue ;
+  String? id ;
   Future callRequest()async{
+    responseModel.table.clear();
+    response.table.clear();
     var pref=AppSharedPref();
     String ip=await pref.getIp();
     response=await drawerApiRequest(userId,ip);

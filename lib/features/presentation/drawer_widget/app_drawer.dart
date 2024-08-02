@@ -11,7 +11,7 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var provider=Provider.of<DrawerProvider>(context);
-    provider.isLoaded?null:provider.callRequest();
+   provider.callRequest();
     return RefreshIndicator(
       onRefresh: ()async{
         provider.callRequest();
@@ -35,7 +35,7 @@ class AppDrawer extends StatelessWidget {
                 ),
                 const SizedBox(height:10),
                 const Divider(height: 5,color: Colors.white,),
-               provider.isLoaded?ListView.separated(
+              ListView.separated(
                    separatorBuilder: (context,index){return
                      const Divider(color: Colors.grey,height: 2,);},
                    itemCount: provider.response.table.length,
@@ -58,7 +58,7 @@ class AppDrawer extends StatelessWidget {
                        ),
                      );
 
-                   }):const CircularProgressIndicator(),
+                   })
               ],
             ),
           ),

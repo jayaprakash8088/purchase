@@ -12,12 +12,12 @@ class HomeProvider extends ChangeNotifier {
   List<MyTable>table1=[];
   List<MyTable>table2=[];
   List<String>docId=[];
-  Future callRequest(String id) async {
+  Future callRequest(String? id) async {
     var pref=AppSharedPref();
     String ip=await pref.getIp();
     tempResponse.table.clear();
     docId=[];
-    response = await homeApiReq(id, level,ip);
+    response = await homeApiReq(id!, level,ip);
     if (response != null) {
       table1=response.table;
       for(int i=0;i<table1.length;i++){
