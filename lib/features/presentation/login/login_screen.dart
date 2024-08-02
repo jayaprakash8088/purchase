@@ -76,79 +76,84 @@ class _LoginPageState extends State<LoginPage> {
             backgroundColor: const Color.fromRGBO(174, 39, 95, 1),
           )),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: TextField(
-              controller: loginProvider.userName,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(), hintText: userIdText),
+          Expanded(child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: TextField(
+                controller: loginProvider.userName,
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(), hintText: userIdText),
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: TextField(
-              obscureText: loginProvider.showClicked,
-              controller: loginProvider.pwd,
-              decoration: InputDecoration(
-                  suffix: GestureDetector(
-                    onTap: () {
-                      loginProvider.changeShow();
-                    },
-                    child: Text(
-                      show,
-                      style: blackText,
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: TextField(
+                obscureText: loginProvider.showClicked,
+                controller: loginProvider.pwd,
+                decoration: InputDecoration(
+                    suffix: GestureDetector(
+                      onTap: () {
+                        loginProvider.changeShow();
+                      },
+                      child: Text(
+                        show,
+                        style: blackText,
+                      ),
                     ),
-                  ),
-                  border: const OutlineInputBorder(),
-                  // labelText: 'Password',
-                  hintText: password),
+                    border: const OutlineInputBorder(),
+                    // labelText: 'Password',
+                    hintText: password),
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 10.0,
-          ),
-          GestureDetector(
-            onTap: ()  async{
-              if(loginProvider.userName.text.trim().isNotEmpty &&
-                  loginProvider.pwd.text.trim().isNotEmpty){
-                if  (_connectionStatus[0]==ConnectivityResult.mobile||
-              _connectionStatus[0]==ConnectivityResult.wifi){
-                  bool response = await loginProvider.callRequest(context);
-                  if (response) {
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(builder: (context) => const MainMenu()),
-                            (route) => false);
+            const SizedBox(
+              height: 10.0,
+            ),
+            GestureDetector(
+              onTap: ()  async{
+                if(loginProvider.userName.text.trim().isNotEmpty &&
+                    loginProvider.pwd.text.trim().isNotEmpty){
+                  if  (_connectionStatus[0]==ConnectivityResult.mobile||
+                      _connectionStatus[0]==ConnectivityResult.wifi){
+                    bool response = await loginProvider.callRequest(context);
+                    if (response) {
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (context) => const MainMenu()),
+                              (route) => false);
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text(somethingWrong)));
+                    }
                   } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text(somethingWrong)));
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(const SnackBar(content: Text(checkInternet)));
                   }
-                } else {
-                  ScaffoldMessenger.of(context)
-                      .showSnackBar(const SnackBar(content: Text(checkInternet)));
+                }else{
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text(userPwd)));
                 }
-              }else{
-                ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text(userPwd)));
-              }
-            },
-            child: Container(
-              height: 50,
-              width: 250,
-              decoration: BoxDecoration(
-                  color: const Color.fromRGBO(174, 39, 95, 1),
-                  borderRadius: BorderRadius.circular(20)),
-              child: Center(
-                child: Text(
-                  login,
-                  style: smallWhiteText,
+              },
+              child: Container(
+                height: 50,
+                width: 250,
+                decoration: BoxDecoration(
+                    color: const Color.fromRGBO(174, 39, 95, 1),
+                    borderRadius: BorderRadius.circular(20)),
+                child: Center(
+                  child: Text(
+                    login,
+                    style: smallWhiteText,
+                  ),
                 ),
               ),
             ),
-          ),
+          ],)),
+          Text(version,style: pinkText,),
+          const SizedBox(height: 10.0,)
         ],
       ),
     );
