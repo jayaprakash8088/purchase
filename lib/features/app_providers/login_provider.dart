@@ -13,6 +13,9 @@ class LoginProvider extends ChangeNotifier{
   // HomeResponseModel response=HomeResponseModel(table: []);
   TextEditingController userName=TextEditingController();
   TextEditingController pwd=TextEditingController();
+
+  TextEditingController registerUserName=TextEditingController();
+  TextEditingController companyCode=TextEditingController();
   Future<bool> callRequest(BuildContext context)async{
     showLoaderDialog(context);
     // if(!isLoaded){

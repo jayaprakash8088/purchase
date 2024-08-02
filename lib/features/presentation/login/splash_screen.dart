@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(
-      const Duration(seconds: 2),
+      const Duration(seconds: 1),
       () async {
         var pref = AppSharedPref();
         String ip = await pref.getIp();
@@ -34,25 +34,26 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        decoration: const BoxDecoration(
-            image:
-                DecorationImage(image: AssetImage(splash), fit: BoxFit.fill)),
-        child: const Padding(
-          padding: EdgeInsets.only(top: 10.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SplashScreenText(text1: title, text2: version),
-              SplashScreenText(text1: mailId, text2: webAdd)
-            ],
-          ),
-        ),
-      ),
+    return const Scaffold(
+      body: Center(child: CircularProgressIndicator(),),
+      // body: Container(
+      //   height: MediaQuery.of(context).size.height,
+      //   width: MediaQuery.of(context).size.width,
+      //   decoration: const BoxDecoration(
+      //       image:
+      //           DecorationImage(image: AssetImage(splash), fit: BoxFit.fill)),
+      //   child: const Padding(
+      //     padding: EdgeInsets.only(top: 10.0),
+      //     child: Column(
+      //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //       crossAxisAlignment: CrossAxisAlignment.center,
+      //       children: [
+      //         SplashScreenText(text1: title, text2: version),
+      //         SplashScreenText(text1: mailId, text2: webAdd)
+      //       ],
+      //     ),
+      //   ),
+      // ),
     );
   }
 }
