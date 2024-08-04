@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:convert';
+
 import 'package:fl_toast/fl_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -91,9 +92,8 @@ class ApprovedCardWidget extends StatelessWidget {
   }
 
   Future<void> _first(BuildContext context) async {
-
-    var pref=AppSharedPref();
-    String ip=await pref.getIp();
+    var pref = AppSharedPref();
+    String ip = await pref.getIp();
     showLoaderDialog(baseContext);
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('dd/MM/yyyy').format(now);
@@ -107,97 +107,101 @@ class ApprovedCardWidget extends StatelessWidget {
       'level': level
     };
     var value = jsonEncode(formData);
-    bool val = await approveRejectApiRequest(value,ip);
+    bool val = await approveRejectApiRequest(value, ip);
     if (val) {
       await showTextToast(
-        duration:  const Duration(seconds: 1),
+        duration: const Duration(seconds: 1),
         text: approved,
         context: baseContext,
       );
-     remove();
+      remove();
       Navigator.pop(baseContext);
-    }else{
+    } else {
       Navigator.pop(baseContext);
       await showTextToast(
-        duration: const Duration(seconds:2 ),
+        duration: const Duration(seconds: 2),
         text: tryAgain,
         context: baseContext,
       );
     }
-
   }
 
-  second(BuildContext baseContext1) async{
+  second(BuildContext baseContext1) async {
     TextEditingController textEditingController = TextEditingController();
-    bool rejectClicked=false;
-   showDialog(
+    bool rejectClicked = false;
+    showDialog(
       context: baseContext1,
       barrierDismissible: false,
       builder: (context) {
-        return StatefulBuilder(builder: (context,setState){
-         return AlertDialog(
+        return StatefulBuilder(builder: (context, setState) {
+          return AlertDialog(
             title: Text(
               rejectionReason,
               style: pinkText,
             ),
-            content:  Column(
+            content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-               rejectClicked?const CircularProgressIndicator(): TextField(
-                  controller: textEditingController,
-                ),
+                rejectClicked
+                    ? const CircularProgressIndicator()
+                    : TextField(
+                        controller: textEditingController,
+                      ),
               ],
             ),
             actions: [
-              rejectClicked?
-              const SizedBox(): TextButton(
-                child: const Text(cancel),
-                onPressed: () {
-                  Navigator.pop(context,false);
-                },
-              ),
-              rejectClicked?
-              const SizedBox():
-              TextButton(
-                child: const Text(reject),
-                onPressed: ()async  {
-                  var pref=AppSharedPref();
-                  String ip=await pref.getIp();
-                  if(textEditingController.text.trim().isNotEmpty){
-                    FocusScope.of(context).unfocus();
-                    DateTime now = DateTime.now();
-                    String formattedDate = DateFormat('dd/MM/yyyy').format(now);
-                    Map formData = {
-                      'DCNO': 'R',
-                      'docNo': table.O,
-                      'userId': userId,
-                      'reason': textEditingController.text,
-                      'date': formattedDate,
-                      'status': 'R',
-                      'level': level
-                    };
-                    var value = jsonEncode(formData);
-                    bool val = await approveRejectApiRequest(value,ip);
-                    if (val) {
-                      setState((){rejectClicked=true;});
-                      await showTextToast(
-                        text: rejected,
-                        duration:  const Duration(microseconds: 500),
-                        context:baseContext,
-                      );
-                      remove();
-                    }else{
-                      showTextToast(
-                        text: tryAgain,
-                        duration:  const Duration(seconds:2 ),
-                        context:baseContext,
-                      );
-                    }
-                    Navigator.pop(context);
-                  }
-
-                },
-              ),
+              rejectClicked
+                  ? const SizedBox()
+                  : TextButton(
+                      child: const Text(cancel),
+                      onPressed: () {
+                        Navigator.pop(context, false);
+                      },
+                    ),
+              rejectClicked
+                  ? const SizedBox()
+                  : TextButton(
+                      child: const Text(reject),
+                      onPressed: () async {
+                        var pref = AppSharedPref();
+                        String ip = await pref.getIp();
+                        if (textEditingController.text.trim().isNotEmpty) {
+                          FocusScope.of(context).unfocus();
+                          DateTime now = DateTime.now();
+                          String formattedDate =
+                              DateFormat('dd/MM/yyyy').format(now);
+                          Map formData = {
+                            'DCNO': 'R',
+                            'docNo': table.O,
+                            'userId': userId,
+                            'reason': textEditingController.text,
+                            'date': formattedDate,
+                            'status': 'R',
+                            'level': level
+                          };
+                          var value = jsonEncode(formData);
+                          bool val = await approveRejectApiRequest(value, ip);
+                          if (val) {
+                            setState(() {
+                              rejectClicked = true;
+                            });
+                            await showTextToast(
+                              text: rejected,
+                              duration: const Duration(microseconds: 500),
+                              context: baseContext,
+                            );
+                            remove();
+                          } else {
+                            showTextToast(
+                              text: tryAgain,
+                              duration: const Duration(seconds: 2),
+                              context: baseContext,
+                            );
+                          }
+                          Navigator.pop(context);
+                        }
+                      },
+                    ),
             ],
           );
         });

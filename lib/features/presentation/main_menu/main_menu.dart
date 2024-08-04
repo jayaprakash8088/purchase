@@ -11,15 +11,26 @@ class MainMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(preferredSize: Size(MediaQuery.of(context).size.width ,
-          MediaQuery.of(context).size.height*0.08),
-          child:AppBar(
-            title: Text(mainMenu,style: whiteText),
-            backgroundColor: const Color.fromRGBO(174, 39, 95,1),
+      appBar: PreferredSize(
+          preferredSize: Size(MediaQuery.of(context).size.width,
+              MediaQuery.of(context).size.height * 0.08),
+          child: AppBar(
+            title: Text(mainMenu, style: whiteText),
+            backgroundColor: const Color.fromRGBO(174, 39, 95, 1),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  logOutDialog(context);
+                },
+                icon: const Icon(Icons.logout),
+                iconSize: 24.0,
+                color: Colors.white,
+              )
+            ],
           )),
       body: PopScope(
         canPop: false,
-        onPopInvoked: (_)=>logOutDialog(context),
+        onPopInvoked: (_) => logOutDialog(context),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -29,19 +40,17 @@ class MainMenu extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ApprovalPage()),
-                        );
+                  context,
+                  MaterialPageRoute(builder: (context) => const ApprovalPage()),
+                );
               },
               child: Center(
                 child: Container(
                   height: 50,
                   width: 250,
-                  decoration:  BoxDecoration(
-                    color: const Color.fromRGBO(174, 39, 95, 1),
-                    borderRadius: BorderRadius.circular(20)
-                  ),
+                  decoration: BoxDecoration(
+                      color: const Color.fromRGBO(174, 39, 95, 1),
+                      borderRadius: BorderRadius.circular(20)),
                   child: Center(
                     child: Text(
                       title,

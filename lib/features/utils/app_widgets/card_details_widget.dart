@@ -7,9 +7,9 @@ class CardDetailsWidget extends StatelessWidget {
       {super.key,
       required this.title,
       required this.desc,
-        this.processNum='0',
-        this.stockNum='0',
-       this.isForStock=false});
+      this.processNum = '0',
+      this.stockNum = '0',
+      this.isForStock = false});
 
   final String title;
   final String desc;
@@ -30,6 +30,7 @@ class CardDetailsWidget extends StatelessWidget {
                 width: 100,
                 child: Text(
                   title,
+                  overflow: TextOverflow.clip,
                   style: blackText,
                 )),
           ),
@@ -37,15 +38,19 @@ class CardDetailsWidget extends StatelessWidget {
             ':',
             style: blackText,
           ),
-         isForStock?
-          StockWidget(inStockNum: stockNum, processingNum:processNum):
-         Padding(
-            padding: const EdgeInsets.only(right: 5.0, left: 5.0),
-            child: Text(
-              desc,
-              style: pinkText,
-            ),
-          )
+          isForStock
+              ? StockWidget(inStockNum: stockNum, processingNum: processNum)
+              : SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.6,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 5.0, left: 5.0),
+                    child: Text(
+                      desc,
+                      overflow: TextOverflow.clip,
+                      style: pinkText,
+                    ),
+                  ),
+                )
         ],
       ),
     );

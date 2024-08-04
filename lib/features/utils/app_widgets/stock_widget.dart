@@ -4,10 +4,10 @@ import 'package:purchase_approval/features/utils/my_strings.dart';
 import '../text_style.dart';
 
 class StockWidget extends StatelessWidget {
-  const StockWidget({super.key, required this.inStockNum,
-    required this.processingNum});
-    final String inStockNum;
-    final String processingNum;
+  const StockWidget(
+      {super.key, required this.inStockNum, required this.processingNum});
+  final String inStockNum;
+  final String processingNum;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -15,12 +15,20 @@ class StockWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Padding(
-          padding: const EdgeInsets.only(right: 5.0,left: 5.0),
-          child: Text('$onHand $inStockNum',style: pinkText,),
+          padding: const EdgeInsets.only(right: 5.0, left: 5.0),
+          child: Text(
+            '$onHand $inStockNum',
+            style: pinkText,
+            overflow: TextOverflow.clip,
+          ),
         ),
         Padding(
-          padding: const EdgeInsets.only(right: 5.0,left: 5.0),
-          child: Text('$processing  $processingNum',style: pinkText,),
+          padding: const EdgeInsets.only(right: 5.0, left: 5.0),
+          child: Text(
+            '$processing  $processingNum',
+            style: pinkText,
+            overflow: TextOverflow.clip,
+          ),
         )
       ],
     );
