@@ -20,6 +20,14 @@ class ApprovalPage extends StatelessWidget {
               MediaQuery.of(context).size.height * 0.08),
           child: AppBar(
             title: Text(mainMenu, style: whiteText),
+            leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.keyboard_backspace),
+              iconSize: 24.0,
+              color: Colors.white,
+            ),
             actions: [
               IconButton(
                 onPressed: () {

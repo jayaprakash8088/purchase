@@ -8,35 +8,37 @@ import 'package:purchase_approval/features/utils/app_config.dart';
 import '../../data/app_shared_pref.dart';
 import '../utils/app_widgets/please_wait.dart';
 
-class LoginProvider extends ChangeNotifier{
-  bool showClicked=true;
+class LoginProvider extends ChangeNotifier {
+  bool showClicked = true;
   // HomeResponseModel response=HomeResponseModel(table: []);
-  TextEditingController userName=TextEditingController();
-  TextEditingController pwd=TextEditingController();
+  TextEditingController pwd = TextEditingController();
 
-  TextEditingController registerUserName=TextEditingController();
-  TextEditingController companyCode=TextEditingController();
-  Future<bool> callRequest(BuildContext context)async{
+  TextEditingController registerUserName = TextEditingController();
+  TextEditingController companyCode = TextEditingController();
+  Future<bool> callRequest(BuildContext context) async {
     showLoaderDialog(context);
     // if(!isLoaded){
-    var pref=AppSharedPref();
-    String ip=await pref.getIp();
-      dynamic response=await loginApiRequest(userName.text.trim(),pwd.text.trim(),ip);
-      if(response!=null&&response){
-        Navigator.pop(context);
-        userId=userName.text.trim();
-        return true;
-      }else {
-        Navigator.pop(context);
-        return false;
-      }
+    var pref = AppSharedPref();
+    String ip = await pref.getIp();
+    dynamic response = await loginApiRequest(
+        registerUserName.text.trim(), pwd.text.trim(), ip);
+    if (response != null && response) {
+      Navigator.pop(context);
+      userId = registerUserName.text.trim();
+      registerUserName.clear();
+      pwd.clear();
+      companyCode.clear();
+      return true;
+    } else {
+      Navigator.pop(context);
+      return false;
     }
-
-
-    //change obscure
-
- void changeShow(){
-    showClicked=!showClicked;
-    notifyListeners();
- }
   }
+
+  //change obscure
+
+  void changeShow() {
+    showClicked = !showClicked;
+    notifyListeners();
+  }
+}

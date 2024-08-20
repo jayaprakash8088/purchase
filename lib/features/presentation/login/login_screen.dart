@@ -10,6 +10,7 @@ import 'package:purchase_approval/features/utils/my_strings.dart';
 import 'package:purchase_approval/features/utils/text_style.dart';
 
 import '../main_menu/main_menu.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -18,7 +19,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   List<ConnectivityResult> _connectionStatus = [ConnectivityResult.none];
   final Connectivity _connectivity = Connectivity();
   late StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
@@ -59,8 +59,6 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     var loginProvider = Provider.of<LoginProvider>(context);
@@ -78,82 +76,90 @@ class _LoginPageState extends State<LoginPage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+          Expanded(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: TextField(
-                controller: loginProvider.userName,
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(), hintText: userIdText),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: TextField(
+                  controller: loginProvider.registerUserName,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(), hintText: userIdText),
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: TextField(
-                obscureText: loginProvider.showClicked,
-                controller: loginProvider.pwd,
-                decoration: InputDecoration(
-                    suffix: GestureDetector(
-                      onTap: () {
-                        loginProvider.changeShow();
-                      },
-                      child: Text(
-                        show,
-                        style: blackText,
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: TextField(
+                  obscureText: loginProvider.showClicked,
+                  controller: loginProvider.pwd,
+                  decoration: InputDecoration(
+                      suffix: GestureDetector(
+                        onTap: () {
+                          loginProvider.changeShow();
+                        },
+                        child: Text(
+                          show,
+                          style: blackText,
+                        ),
                       ),
-                    ),
-                    border: const OutlineInputBorder(),
-                    // labelText: 'Password',
-                    hintText: password),
+                      border: const OutlineInputBorder(),
+                      // labelText: 'Password',
+                      hintText: password),
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 10.0,
-            ),
-            GestureDetector(
-              onTap: ()  async{
-                if(loginProvider.userName.text.trim().isNotEmpty &&
-                    loginProvider.pwd.text.trim().isNotEmpty){
-                  if  (_connectionStatus[0]==ConnectivityResult.mobile||
-                      _connectionStatus[0]==ConnectivityResult.wifi){
-                    bool response = await loginProvider.callRequest(context);
-                    if (response) {
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(builder: (context) => const MainMenu()),
-                              (route) => false);
+              const SizedBox(
+                height: 10.0,
+              ),
+              GestureDetector(
+                onTap: () async {
+                  if (loginProvider.registerUserName.text.trim().isNotEmpty &&
+                      loginProvider.pwd.text.trim().isNotEmpty) {
+                    if (_connectionStatus[0] == ConnectivityResult.mobile ||
+                        _connectionStatus[0] == ConnectivityResult.wifi) {
+                      bool response = await loginProvider.callRequest(context);
+                      if (response) {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const MainMenu()),
+                            (route) => false);
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text(somethingWrong)));
+                      }
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text(somethingWrong)));
+                          const SnackBar(content: Text(checkInternet)));
                     }
                   } else {
                     ScaffoldMessenger.of(context)
-                        .showSnackBar(const SnackBar(content: Text(checkInternet)));
+                        .showSnackBar(const SnackBar(content: Text(userPwd)));
                   }
-                }else{
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text(userPwd)));
-                }
-              },
-              child: Container(
-                height: 50,
-                width: 250,
-                decoration: BoxDecoration(
-                    color: const Color.fromRGBO(174, 39, 95, 1),
-                    borderRadius: BorderRadius.circular(20)),
-                child: Center(
-                  child: Text(
-                    login,
-                    style: smallWhiteText,
+                },
+                child: Container(
+                  height: 50,
+                  width: 250,
+                  decoration: BoxDecoration(
+                      color: const Color.fromRGBO(174, 39, 95, 1),
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Center(
+                    child: Text(
+                      login,
+                      style: smallWhiteText,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],)),
-          Text(version,style: pinkText,),
-          const SizedBox(height: 10.0,)
+            ],
+          )),
+          Text(
+            version,
+            style: pinkText,
+          ),
+          const SizedBox(
+            height: 10.0,
+          )
         ],
       ),
     );

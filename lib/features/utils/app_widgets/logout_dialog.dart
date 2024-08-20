@@ -1,11 +1,10 @@
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:purchase_approval/features/presentation/login/login_screen.dart';
 
 import '../my_strings.dart';
 import '../text_style.dart';
 
-logOutDialog(BuildContext baseContext){
+logOutDialog(BuildContext baseContext) {
   showDialog(
     context: baseContext,
     builder: (BuildContext context) {
@@ -23,9 +22,12 @@ logOutDialog(BuildContext baseContext){
           ),
           TextButton(
             child: const Text(logout),
-            onPressed: ()  {
+            onPressed: () {
               Navigator.pop(context);
-              SystemNavigator.pop();
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                  (route) => false);
             },
           ),
         ],

@@ -27,6 +27,14 @@ class PurchaseApprovalPage extends StatelessWidget {
                 child: Text(levelString + level.toString(), style: whiteText),
               ),
             ],
+            leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.keyboard_backspace),
+              iconSize: 24.0,
+              color: Colors.white,
+            ),
             backgroundColor: const Color.fromRGBO(174, 39, 95, 1),
           )),
       body: Column(
